@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {increment, decrement} from './ducks/counter'
 
 class Counter extends Component {
   render() {
@@ -9,25 +11,25 @@ class Counter extends Component {
           <div className="counter__button-wrapper">
             <button
               className="counter__button increment-one"
-              onClick={() => null}
+              onClick={()=> this.props.increment(1)}
             >
               +1
             </button>
             <button
               className="counter__button increment-five"
-              onClick={() => null}
+              onClick={()=>this.props.increment(5)}
             >
               +5
             </button>
             <button
               className="counter__button decrement-one"
-              onClick={() => null}
+              onClick={()=>this.props.decrement(1)}
             >
               -1
             </button>
             <button
               className="counter__button decrement-five"
-              onClick={() => null}
+              onClick={()=>this.props.decrement(5)}
             >
               -5
             </button>
@@ -56,4 +58,6 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, {increment, decrement})(Counter);
